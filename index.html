@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AardvarkPepper's Axis and Allies&#174 Calculation Tool</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="./browserScript.js"></script>
+    <script defer src="./main.js"></script>
+</head>
+
+<!--To do:
+Design and add logo to browser tab.  Legal disclaimer
+The AXIS & ALLIES® game and its associated trademarks, logos and copyrights are the property of Hasbro, Inc. and Wizards of the Coast LLC. This application is neither endorsed nor sponsored by Hasbro or Wizards of the Coast, and the developer of this application is not affiliated with either company. 
+About
+Contact (form cleans up email?
+Rulesets links?
+Toolbar and dropdown menus.  Sticky?  Eh.  Rethink presentation.
+
+Ruleset
+Options
+Rounds - Type
+Clear; Swap; Attack, Defense
+Units
+
+IPC Value Total
+Avg IPC Loss 
+Avg Win (3 fields
+Share battle, view stat in popout, pie, bar, . . . time elapse?  And RUN button.)
+Work name / logo into design of app so it's easily visible in reproductions.
+)
+-->
+
+<body>
+    <div>
+        <form>
+            <label>
+                Land
+                <input id = "land" name="OperationDomain" type="radio" value="celsius" checked="checked"/>
+            </label>
+            <label>
+                Sea
+                <input id = "sea" name="OperationDomain" type="radio" value="fahrenheit" />
+            </label>
+            <label>
+                Amphibious
+                <input id = "amphibious" name="OperationDomain" type="radio" value="fahrenheit" />
+            </label>
+            <!--<input type = "submit" value = "Submit" />-->
+        </form>
+    </div>
+
+    <!-- <div id = "list">
+        <div class = "draggable">A</div>
+        <div class = "draggable">B</div>
+        <div class = "draggable">C</div>
+        <div class = "draggable">D</div>
+        <div class = "draggable">E</div>
+    </div> -->
+    
+    <div id="list">
+        <div class="draggable battleship">
+            <button class="pressable" onclick="deleteRow(event)">&#10005;</button>
+            <button class="pressable" onclick="splitRow(event)">+</button>
+            <button class="pressable flagButton" onclick="cycleFlag(event)">USSR</button>
+            <span class = "unitSpan">Battleship</span>
+            <!-- <button class="unitButton">Battleship</button> -->
+            <input type="text" size="2" value="0" />
+            Row command number
+            Row destination number
+            Loop count number
+        </div>
+        <div class="draggable aaartillery">
+            <button class="pressable" onclick="deleteRow(event)">&#10005;</button>
+            <button class="pressable" onclick="splitRow(event)">+</button>
+            <button class="pressable flagButton" onclick="cycleFlag(event)">USSR</button>
+            <button class="unitButton">aaartillery</button>
+            <input type="text" size="2" value="0" />
+            Row command number
+            Row destination number
+            Loop count number
+        </div>
+        <div class="draggable icomplex">
+            <button class="pressable" onclick="deleteRow(event)">&#10005;</button>
+            <button class="pressable" onclick="splitRow(event)">+</button>
+            <button class="pressable flagButton" onclick="cycleFlag(event)">USSR</button>
+            <button class="unitButton">icomplex</button>
+            <input type="text" size="2" value="0" />
+            Row command number
+            Row destination number
+            Loop count number
+        </div>
+    </div>
+
+</body>
+
+</html>
