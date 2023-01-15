@@ -1,0 +1,65 @@
+<!-- To do:  Generate function to create Probability Density Function of binomial distribution -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="./about_OnLoad.js"></script>
+    <script defer src="./about_rngAPIUI.js"></script>
+</head>
+
+<body>
+    <header>
+        The AXIS & ALLIES® game and its associated trademarks, logos and copyrights are the property of Hasbro, Inc. and Wizards of the Coast LLC.
+        <br>
+        This application is neither endorsed nor sponsored by Hasbro or Wizards of the Coast, and the developer of this application is not affiliated with either company.
+        <br>
+        <a href = "https://uspto.report/TM/88181704">Hasbro's Axis and Allies Trademark Registration Link at USPTO</a>
+    </header>
+
+    <div id = "catpic"></div>
+
+    <h2>The Project</h2>
+
+    <p>Created and maintained as part of building out my portfolio.</p>
+
+    <h2>Dice Project</h2>
+    <span>Random dice courtesy of </span>
+    <a href = "https://github.com/jameskozlowski/randomnumberapi">Random Number API.</a>
+
+    <form id="login">
+        <label># of 6-sided dice:
+            <!-- on.Click"this.select()" new functionality (in terms of class project)-->
+            <input id="aDiceCount" class="defaultText" type="text" size="4" value ="10" onClick="this.select()"/>
+        </label>
+        <label># or less required to hit:
+            <input id="aToHit" class="defaultText" type="text" size="4" value ="2" onClick="this.select()"/>
+        </label>
+        <button class="submit" onclick="aTestRun(event)">Roll Dice</button>
+    </form>
+    <br>
+    <div id = "aOutput"></div>
+    <div><strong> Hit Count: </strong> 
+        <span>Actual: </span>
+        <span id = "aHitCount"></span>
+        <span>-- Expected: </span>
+        <span id = "avgHitCount"></span>
+    </div>
+    <div><strong>Sample Variance: </strong>
+        <span id = "calcVariance"></span>
+    </div>
+    <div><strong>Sample Standard Deviation: </strong>
+        <span id = "stdDev"></span>
+    </div>
+    <br>
+    <br>
+
+    <a href = "./index.html">Back to Main</a>
+    
+</body>
+</html>
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Instructions</title>
+</head>
+<body>
+    <header>
+        The AXIS & ALLIES® game and its associated trademarks, logos and copyrights are the property of Hasbro, Inc. and Wizards of the Coast LLC.
+        <br>
+        This application is neither endorsed nor sponsored by Hasbro or Wizards of the Coast, and the developer of this application is not affiliated with either company.
+        <br>
+        <a href = "https://uspto.report/TM/88181704">Hasbro's Axis and Allies Trademark Registration Link at USPTO</a>
+    </header>
+
+    <br>
+
+    <h2>Order Of Loss Instructions</h2>
+
+    <img src="./instructions_oolExample.jpg" alt="Example of OOL">
+    <div id = "cssgrid">
+    <div id = "column1">
+    <p>Land / Sea / Amphibious radio buttons:  Select type of battle.  "Amphibious" does not include cruisers or battleships used for naval bombardment, as they cannot be removed as casualties.</p>
+    <p>"X" - removes line.</p>
+    <p>"+" - creates new copy of line.</p>
+    <p>"Transport" - (or other unit) - unit name</p>
+    <p>"-1" - number of units in OOL.  "-1" is a special instruction meaning to take all remaining units of the controlling power / unit type.</p>
+    </div>
+
+    <div id = "column2">
+    <p>"#(number)&#129054" - assigned number, in order, of priority of preservation.  "Transport" is listed as #1, so is preserved first, and taken as a casualty last.</p>
+    <p>"1" - after all units in the current index element are remomved, this number references the next index that will have units removed.  (Note:  Will fix this later to be less confusing); "2" would make more sense to readers, or perhaps change above to #(0)&#129054".</p>
+    <p>#&#11118;: (number) - number of loops to execute.  "-1" is a special instruction meaning to maximize number of loops.</p>
+    <p>OOL Priority:  (number) - Order Of Loss Priority.</p>
+
+    <p>In the pictured example, transports are lost last; they have the highest priority of preservation and the lowest OOL priority.</p>
+    </div>
+
+    <div id = "column3">
+    <p>Priority lines 3 and 4 list, respectively, 1 carrier, 2 fighters.  (note:  double check logic for accuracy).  After two fighters are removed, a carrier is removed; then the instruction loops so fighters are removed then a carrier, etc.</p>
+    <p>Priority lines 5 and 6 list, respectively, 1 carrier, 1 fighter.  After groups of 2 fighters and 1 carrier are maximized then removed from actual unit count, groups of 1 fighter and 1 carrier are defined.  Priority lines 7 and 8 serve a similar purpose; to handle fighters and carriers that remain unallocated after the groups of (2 fighter 1 carrier) are removed. </p>
+
+    <p>To do:  Build out OOL instructions by power, rewrite rules for clarity (including 0 index, to avoid confusion between user documentation and programmers), remove "X" button from minimum 1 of remainder (as remainder function must always exist).  Build simplified implementation and instructions for casual users, advanced implementation and instructions for advanced users, "lock" and "unlock" advanced features with switch (not deletion).</p>
+    </div>
+    <!-- end cssgrid -->
+    </div>
+
+    <br>
+
+    <a href = "./index.html">Back to Main</a>
+    
+</body>
+</html>

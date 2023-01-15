@@ -5,15 +5,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AardvarkPepper's Axis and Allies&#174 Calculation Tool</title>
+    <title>AardvarkPepper's Dice Calculation Tool</title>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="./browserScript.js"></script>
-    <script defer src="./main.js"></script>
+    <script defer src="./index_mouseClickDrag.js"></script>
+    <script defer src="./index_loginUI.js"></script>
+    <script defer src="./index_oolUI.js"></script>
+    <script defer src="./index_main.js"></script>
+
 </head>
 
 <!--To do:
-Design and add logo to browser tab.  Legal disclaimer
-The AXIS & ALLIES® game and its associated trademarks, logos and copyrights are the property of Hasbro, Inc. and Wizards of the Coast LLC. This application is neither endorsed nor sponsored by Hasbro or Wizards of the Coast, and the developer of this application is not affiliated with either company. 
 About
 Contact (form cleans up email?
 Rulesets links?
@@ -33,25 +34,60 @@ Work name / logo into design of app so it's easily visible in reproductions.
 )
 -->
 
+<!-- Buttons instead of radio buttons would save space.  But implementing a "constantly pressed" alternative look might be confusing to some; I haven't seen that sort of thing implemented in years.  And keeping radio button code means this project serves as an example of how to implement radio buttons, buttons, and text fields.  So eh. -->
+
 <body>
-    <div>
-        <form>
-            <label>
-                Land
-                <input id = "land" name="OperationDomain" type="radio" value="celsius" checked="checked"/>
-            </label>
-            <label>
-                Sea
-                <input id = "sea" name="OperationDomain" type="radio" value="fahrenheit" />
-            </label>
-            <label>
-                Amphibious
-                <input id = "amphibious" name="OperationDomain" type="radio" value="fahrenheit" />
-            </label>
-            <!--<input type = "submit" value = "Submit" />-->
-        </form>
+    <header>
+        The AXIS & ALLIES® game and its associated trademarks, logos and copyrights are the property of Hasbro, Inc. and Wizards of the Coast LLC.
+        <br>
+        This application is neither endorsed nor sponsored by Hasbro or Wizards of the Coast, and the developer of this application is not affiliated with either company.
+        <br>
+        <a href = "https://uspto.report/TM/88181704">Hasbro's Axis and Allies Trademark Registration Link at USPTO</a>
+    </header>
+
+    <br>
+
+    <a href = "./about.html">About This Project</a>
+
+    <a href = "./instructions.html">Instructions On Use</a>
+
+    <form id="login">
+        <label>Username:
+            <!-- on.Click"this.select()" new functionality (in terms of class project)-->
+            <input id="username" class="defaultText" type="text" size="12" placeholder="Anonymous" onClick="this.select()"/>
+        </label>
+        <label>Password:
+            <input id="password" class="defaultText" type="password" size="12"/>
+        </label>
+        <button class="submit" onclick="enterData(event)">Log In</button>
+    </form>
+    <button class="pressable" id = "wipe" onclick="wipeData()">Wipe All User Data(!)</button>
+    <span id="wipeSuccess"></span>
+    <div>Current User:
+        <span id="currentUser">
+            (none);
+        </span>
     </div>
 
+    <br>
+
+    <form class="operationSelect">
+        <label>
+            Land
+            <input id="land" name="operationDomain" type="radio" value="land" checked="checked" />
+        </label>
+        <label>
+            Sea
+            <input id="sea" name="operationDomain" type="radio" value="sea" />
+        </label>
+        <label>
+            Amphibious
+            <input id="amphibious" name="operationDomain" type="radio" value="amphibious" />
+        </label>
+        <!--<input type = "submit" value = "Submit" />-->
+    </form>
+
+    <!-- Test code for easy tracking in case draggable bugs. -->
     <!-- <div id = "list">
         <div class = "draggable">A</div>
         <div class = "draggable">B</div>
@@ -59,14 +95,13 @@ Work name / logo into design of app so it's easily visible in reproductions.
         <div class = "draggable">D</div>
         <div class = "draggable">E</div>
     </div> -->
-    
+
     <div id="list">
-        <div class="draggable battleship">
+        <!-- <div class="draggable battleship">
             <button class="pressable" onclick="deleteRow(event)">&#10005;</button>
             <button class="pressable" onclick="splitRow(event)">+</button>
             <button class="pressable flagButton" onclick="cycleFlag(event)">USSR</button>
-            <span class = "unitSpan">Battleship</span>
-            <!-- <button class="unitButton">Battleship</button> -->
+            <span class="unitSpan">Battleship</span>
             <input type="text" size="2" value="0" />
             Row command number
             Row destination number
@@ -91,9 +126,12 @@ Work name / logo into design of app so it's easily visible in reproductions.
             Row command number
             Row destination number
             Loop count number
-        </div>
+        </div> -->
     </div>
+    <footer>
 
+    </footer>
 </body>
+
 
 </html>

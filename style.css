@@ -1,5 +1,49 @@
-#list {
-  background-color: lightgray;
+@media (max-width: 800px) {
+  body {
+    color: white;
+    background-color: black;
+    font-family: "georgia";
+  }
+
+  #list {
+    background-color: darkslategray;
+  }
+}
+
+@media (min-width: 801px) {
+  #list {
+    background-color: lightgray;
+  }
+}
+
+#aOutput {
+  font-size: 400%;
+}
+
+.hit {
+  color: red
+}
+
+.miss {
+  color: green
+}
+
+header {
+  color: darkgray;
+}
+
+header:hover {
+  color: red;
+}
+
+a:visited {
+  color: green;
+}
+
+#wipe {
+  color: white;
+  background-color: red;
+  font-size: large;
 }
 
 .pressable {
@@ -7,13 +51,19 @@
 }
 
 /* 
-Put in a lot of thingies here
+Remember formatting may need to be changed for
 {
   margin-right: 2px;
-} */
+} 
+Remember cross-browser compatability.
+*/
+
+/* minify your CSS here: https://csscompressor.net/ */
+
+/****** header ******/
 
 .flagButton {
-  width:45px;
+  width: 45px;
 }
 
 .unitSpan {
@@ -32,4 +82,17 @@ Put in a lot of thingies here
   display: inline-block;
   text-align: right;
   width: 35px;
+}
+
+#cssgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 5px;
+}
+
+#column1, #column2, #column3 {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: wheat;
+  border: 2px solid blue;
 }
