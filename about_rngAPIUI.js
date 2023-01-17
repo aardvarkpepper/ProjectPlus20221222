@@ -3,8 +3,9 @@
 // Use CSPRNG and periodically reset seeds.  But *which* seeds is also vulnerable, must ensure seeds may not be injected.
 const aTestRun = function fATestRun(event) {
     //event.preventDefault() to prevent CORS Cross-Origin Resource Sharing error
+    //Appended https://sprightly-biscochitos-877a5d.netlify.app/ to attempt to bypass CORS issue.
     event.preventDefault();
-    fetch(`http://www.randomnumberapi.com/api/v1.0/random?min=1&max=6&count=${Number(document.getElementById("aDiceCount").value)}`).
+    fetch(`https://sprightly-biscochitos-877a5d.netlify.app/http://www.randomnumberapi.com/api/v1.0/random?min=1&max=6&count=${Number(document.getElementById("aDiceCount").value)}`).
         then(result => result.json()).
         then(objectArray => {
 
