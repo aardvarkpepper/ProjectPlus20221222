@@ -1,3 +1,23 @@
+// Contains various data.  Have to write test suites to check some basic stuff like totals.  (Already done in xxx_testSuite, but proper tests in npm)
+//This also contains the diceroll object (how many 1s, 2s, etc. needed to hit), and combination of diceroll object arrays.
+//Diceroll objects (attacker and defender) used to generate 2D array (like, attackers X-axis, defenders Y-axis) of hits.
+//Those hits put against OOLs, and those projections used to create next diceroll objects.
+//But consider complexity.  50 attackers, 50 defenders, 2500 entries, which must each be assigned to contingent (not fixed!) OOL
+//So the OOL could itself change depending on relative number of attack and defense hits, and not in a fixed manner, but remember
+// order of hits allocated - information flow is not simultaneous to attacker and defender, nor is casualty removal until after certain
+// information is released.  So each of those 2500 entries needs to have its own OOL assessment, and from the OOLs picked, casualties
+// are allocated and new diceroll objects need to be assessed, and the cycle repeats with a "half-life" (need to compute this sometime)
+// but since it's true binomial calculation and not simulation, there is always an uncomputed fraction.
+// So the fraction needs to be inverted and multiplied so the "all miss" scenario is eliminated.  And that this is being done,
+// the reasons for it, and the consequences on accuracy of reported data, need to be imparted to user.
+// Functionally, we need to compute what "half-life" is, WHY half-life is so-many-turns, what effect early dice aberration have on
+// predictability - . . . and all that goes to reason why we use TRUE computation on, say, the first three rounds?  Four?
+// But we do NOT use TRUE computation for the final assessment; rather we assume rounds repeat so eliminate the fraction of no-hit
+
+// Another factor to report; other calculators report "win" percentages where in actual situations a user would retreat.  This is
+// probably a not too significant fraction, but users will be quick to note discrepancies between 10,000 trials and binomial
+// calculation.
+
 // select all, then ctrl-k, ctrl-f
 // Started project late December 2022.
 // look at https://htmldom.dev/drag-and-drop-element-in-a-list/

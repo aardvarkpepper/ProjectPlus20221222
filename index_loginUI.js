@@ -1,3 +1,11 @@
+//2023 Jan 15; though login UI not priority, some fixes to do:
+// noticed "placeholder" in text field does NOT count as a "value" when reading.
+// wiping data should wipe "current user" field too, and replace with default (none).
+// The rest of the behavior is a bit complicated.  Also, have to consider splitting functionality into local and React.
+// Local still needed so players can use it as a free tool.  (But I'm going to put in advertising.)
+// Rethink user login and password from beginning.  Remember there must be an undeletable unmodifiable default profile for users that don't want to create a profile, but still want access to prebuilt OOLs
+// Have to put in try/catches.  But where?  How many?
+
 //test success 2023 Jan 11
 //login object with username and password created.  login object is itself a value with key of username in localStorage object.  
 const enterData = function fEnterData(event) {

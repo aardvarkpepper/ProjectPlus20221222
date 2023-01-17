@@ -1,13 +1,29 @@
 /*
+2023 Jan 15 ACTIVELY MODFIYING
+
 Ctrl K, Ctrl F formats
+
+Code getting sloppy, go back through and refactor, particularly destructuring, removal of extraneous code (one function's basically in there twice), add "remainder",
+
+Remove "X" from one unit of each type, with an unchangeable -1.  This requires reworking the text entry field to span.  Rework defensive OOLs to have (each Allied power) (each Axis power) respectively, and modify to accept an additional argument for conditionals.
+
+For example, user may want to set "capital defense" when capital attacked, but override with regular defense if attacker has less than 50% to capture, and override even that with anti-strafe defense (losing infantry BEFORE AA) in case of enemy strafe designed to pick off AA guns.  Each of these conditions triggers separately, so are really multiple arguments.  But those multiple arguments
+are passed to another function that returns a single argument, that argument being which OOL to use.
+
+But think on this.  We can't tell the function what OOL to use, because what OOL is used depends on the board conditions, attacking
+and defending forces, and such.  So actually, OOL input needs to have a field stating under what conditions it applies - relative IPC loss after 1-3 rounds (respectively), odds of attack or defense winning, expected IPC and production shift in case of capital capture, and even including whether there are safe landing zones (and where those are).
+Then when the "evaluate" button is pressed, with the ACTUAL unit counts present, and the ACTUAL board position, and the ACTUAL computations under DIFFERENT OOLs, the OPTIMAL OOLs are selected, the REASONS for selection output . . . yeah.
+
+And there need to be presets of every single one of those, and multiple presets even.
+
+FOR NOW:  Prepare functions to accept additional argument in case of OOL generation - specifically, the CONDITIONS and PRIORITY
+that OOL takes place.  Which, well, it seems that I'll have to make additional lists?  Hm.
 
 Go through and convert functions to const, with ; at end of function declaration (as it's also a constant assignment)
 
 Unit reference:  Full name except AAArtillery, iComplex, Carrier, BattleshipDmg
 use alert(event.target.parentElement) or similar to get error messages for ease
 Search for keywords "to fix"
-
-Next priorities: Change format to table, write radio button functionality including table row generation. Create index of current and future organization of files and file functions.
 
 Clean up code.  Write guide to functions and files.  Some of the parts aren't correct for eventual build.
 
@@ -18,6 +34,73 @@ https://www.semrush.com/blog/url-parameters/
 Look into sequential loading (is this already done?) and define order of function use.  Earlier files load first for faster use.
 
 */
+
+/*BINOMIAL PROBABILITY NOTES
+x:  successes
+n:  trials
+P:  Probability success individual trial
+Q:  Probability failure individual trial (1-P)
+n!:  factorial of n; "n factorial"
+b(x; n,P) Binomial probability of x successes in n-trial binomial experiment where probability success is P
+nCr:  number of combinations of n things, taken r at a time
+Copied over from index_main.js; redo files later
+https://stattrek.com/probability-distributions/Binomial
+mean of distribution (ux) = n * P
+variance (o^2x) is n * P * (1-P)
+standard deviation (ox) is sqrt[n*P*(1-P)]
+*/
+
+/**
+ * Calculates factorial n!
+ * @todo test iteration speed against recursion speed.  If using recursion, use tail-end recursion to prevent stack overflow.
+ * @param {number} n - number to be factorial'ed
+ * @returns {number} - factorial of n
+ */
+function factorialCalc(n) {
+    let returnValue = 1;
+    if (n === 0 || n === 1) {
+        return 1;
+    } else {
+        for (let i = 2; i <= n; i++) {
+            returnValue *= i;
+        }
+        return returnValue;
+    }
+}
+/**
+ * Calculates n-element k-combinations, the "binomial coefficient" nCr, n >= k >= 0
+ * n! /  (k! (n-k)! )
+ * @todo:  Check for faster method e.g. not running full factorial.
+ * @param {number} n - out of n units
+ * @param {number} k - taken k at a time
+ * @returns {number} - nCr (or nCk, as it were.)
+ */
+function combinationCalc(n, k) {
+    return factorialCalc(n) / (factorialCalc(k) * factorialCalc(n - k));
+}
+/**
+ * Generates array of hit probabilities from a group of dice that all require same number or less to hit.
+ * E.g. if hit = hit probability and (1-hit) = miss probability, with 5 dice rolled:
+ * probability of 0 hits: (hit)^0 * (1-hit)^5 * 5C0 (5C0 as in nCr, or perhaps nCk, calculated from combinationCalc(n, k).  So here, combinationCalc(5,0))
+ * probability of 1 hits: (hit)^1 * (1-hit)^4 * 5C1
+ * probability of 2 hits: (hit)^2 * (1-hit)^3 * 5C2
+ * probability of 3 hits: (hit)^3 * (1-hit)^2 * 5C3
+ * probability of 4 hits: (hit)^4 * (1-hit)^1 * 5C4
+ * probability of 5 hits: (hit)^5 * (1-hit)^0 * 5C5
+ * @todo - test to see if oneSixth etc. save time if entered as fraction, decimal, or if eliminated altogether.  Theoretically may save computation time?
+ * @todo - rewrite code to utilize dice other than d6, as specified by user.
+ * @param {string} diceToHit - string of the number, e.g. "two", or less required to hit on each six-sided dice
+ * @param {number} numberOfDiceRolled - number of dice rolled
+ * @returns {number[]} - array of probabilities that sum to approximately 1 (should be 1 exactly, but rounding errors)
+ */
+function simpleProbabilityArray(diceToHit, numberOfDiceRolled) {
+    const diceProbability = { one: 1 / 6, two: 2 / 6, three: 3 / 6, four: 4 / 6, five: 5 / 6 }
+    let returnArray = [];
+    for (let i = 0; i <= numberOfDiceRolled; i++) {
+        returnArray[i] = diceProbability[diceToHit] ** i * (1 - diceProbability[diceToHit]) ** (numberOfDiceRolled - i) * combinationCalc(numberOfDiceRolled, i)
+    }
+    return returnArray;
+}
 
 //Test OK 2023 Jan 13
 //The array returned from this is the *virtual* OOL used for unknown quantities.

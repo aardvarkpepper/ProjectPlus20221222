@@ -1,3 +1,4 @@
+//Modify this to affect multiple lists (defense AND attack OOLs at SAME time)
 
 // https://htmldom.dev/drag-and-drop-element-in-a-list/
 // The current dragging item.  I leave off encapsulation for simplicity, and memory use is low.
