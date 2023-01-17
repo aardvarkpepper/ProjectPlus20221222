@@ -17,12 +17,11 @@ const aTestRun = function fATestRun(event) {
             headers: {
                 'Content-Type': 'application/json',
             }
-            console.log(data);
         }
     ).
         then(result => {
             console.log(result);
-            return result.json()
+            return result.json();
         }).
         then(objectArray => {
 
