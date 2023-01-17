@@ -4,8 +4,20 @@
 const aTestRun = function fATestRun(event) {
     //event.preventDefault() to prevent CORS Cross-Origin Resource Sharing error
     //Appended https://sprightly-biscochitos-877a5d.netlify.app/ to attempt to bypass CORS issue.
+    //Previous two attempts did not work. (although second attempt not completed; target and self code very different).
+    // Tried https://stackoverflow.com/questions/48728173/how-do-i-fix-cors-issue-in-fetch-api
     event.preventDefault();
-    fetch(`https://sprightly-biscochitos-877a5d.netlify.app/http://www.randomnumberapi.com/api/v1.0/random?min=1&max=6&count=${Number(document.getElementById("aDiceCount").value)}`).
+    fetch(`http://www.randomnumberapi.com/api/v1.0/random?min=1&max=6&count=${Number(document.getElementById("aDiceCount").value)}`,
+    {
+        {
+            method: "POST", 
+            body: JSON.stringify(data),
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    }).
         then(result => result.json()).
         then(objectArray => {
 
