@@ -12,7 +12,7 @@ const aTestRun = function fATestRun(event) {
     
         {
             method: "POST", 
-            body: JSON.stringify(result),
+            body: JSON.stringify(objectArray),
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
