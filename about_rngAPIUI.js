@@ -8,16 +8,16 @@ const aTestRun = function fATestRun(event) {
     // Tried https://stackoverflow.com/questions/48728173/how-do-i-fix-cors-issue-in-fetch-api
     //Result refreshed when pressing dice button.  Deleted one set of brackets in the fetch (htmladdress, {}) (curly brackets around the curly brackets)
     event.preventDefault();
-    fetch(`http://www.randomnumberapi.com/api/v1.0/random?min=1&max=6&count=${Number(document.getElementById("aDiceCount").value)}`,
+    fetch(`http://www.randomnumberapi.com/api/v1.0/random?min=1&max=6&count=${Number(document.getElementById("aDiceCount").value)}`
     
-        {
-            method: "POST", 
-            body: JSON.stringify(objectArray),
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }
+        // {
+        //     method: "POST", 
+        //     body: JSON.stringify(objectArray),
+        //     mode: 'cors',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     }
+        // }
     ).
         then(result => {
             console.log(result);
